@@ -1,9 +1,9 @@
-import sequelize, {DataTypes, Model} from 'sequelize';
-import connection from '../config/database.js';
+import { DataTypes, Model } from 'sequelize';
+import connections from "../connections/connections.js";
 
-class Users extends Model {}
+class User extends Model {}
 
-Users.init(
+User.init(
     {
         name: DataTypes.STRING(50),
         email: {
@@ -23,7 +23,9 @@ Users.init(
         },
     },
     {
-        sequelize: connection,
+        sequelize: connections,
         modelName: 'User',
     }
     );
+
+    export default User;
