@@ -1,7 +1,10 @@
 import { DataTypes, Model } from 'sequelize';
 import connections from "../connections/connections.js";
+import Curso from './Curso.js'
 
 class User extends Model {}
+
+
 
 User.init(
     {
