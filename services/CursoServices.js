@@ -2,7 +2,7 @@ import {Curso} from "../models/index.js"
 
 class CursoServices {
     getAllCursosServices = async () => {
-        const cursos = await Cursos.findAll();
+        const cursos = await Curso.findAll();
         return cursos;
     };
     getCursoServiceById = (id) => {

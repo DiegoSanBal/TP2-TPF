@@ -7,7 +7,7 @@ class CursoControllers {
         const cursos = await this.cursoServices.getAllCursosServices();
         res.status(200).json({
             success: true,
-            message: curso,
+            message: cursos,
         });
     };
     getCursoByIdControllers = async (req, res) => {
