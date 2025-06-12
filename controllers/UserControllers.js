@@ -21,7 +21,7 @@ class UserControllers {
     createUserControllers = async (req, res) => {
         try {
             const { name, email, password } = req.body;
-            const user = await this.userServices.createUserControllers({
+            const user = await this.userServices.createUserServices({
                 name,
                 email,
                 password,
