@@ -7,5 +7,7 @@ User.belongsTo(Curso);
 Profesor.hasMany(User);
 Profesor.hasOne(Curso);
 Curso.belongsTo(Profesor)
+User.hasMany(Curso);
+Curso.belongsTo(User);
 
 export {User, Curso, Profesor} ;

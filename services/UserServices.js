@@ -1,4 +1,4 @@
-import {User} from "../models/index.js";
+import { User } from "../models/index.js";
 class UserServices {
     getAllUsersServices = async () => {
         const users = await User.findAll();
@@ -9,7 +9,7 @@ class UserServices {
     };
 
     createUserServices = async (data) => {
-        const {id, name } = await User.create(data);
+        const { id, name } = await User.create(data);
         return { id, name };
     };
 }
