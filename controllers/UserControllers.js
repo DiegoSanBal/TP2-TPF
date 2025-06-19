@@ -43,6 +43,25 @@ class UserControllers {
     deleteUserController(req, res) {
         res.status(200).send("deleteUserController");
     }
+
+    login(req, res) {
+        try {
+            const { email, password } = req.body;
+            if (!email || !password) {
+                throw new Error("Email and password are required");
+            }
+            const user = this
+            res.status(200).send({
+                success: true,
+                message: "Login successful",
+            });
+        } catch (error) {
+            res.status(400).send({
+                success: false,
+                message: error.message,
+            });
+        }
+    }
 }
 
 export default UserControllers;
