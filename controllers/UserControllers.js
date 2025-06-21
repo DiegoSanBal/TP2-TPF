@@ -39,21 +39,19 @@ class UserControllers {
     };
     updateUserControllers(req, res) {
         res.status(200).send("updateUserControllers");
-    }
+    };
     deleteUserController(req, res) {
         res.status(200).send("deleteUserController");
-    }
 
-    login(req, res) {
+    };
+    login = async (req, res) => {
         try {
             const { email, password } = req.body;
-            if (!email || !password) {
-                throw new Error("Email and password are required");
-            }
-            const user = this
+            const user =await this.userServices.login([email, password]);
+            res.cookie("login", token);
             res.status(200).send({
                 success: true,
-                message: "Login successful",
+                message: user,
             });
         } catch (error) {
             res.status(400).send({
@@ -61,7 +59,22 @@ class UserControllers {
                 message: error.message,
             });
         }
-    }
+    };
+    me = async (req, res) => {
+        try {
+            const {login} = req.cookies;
+            const user = await this.userSerivices.me(login)
+            res.status(200).send({
+                success: true,
+                message: user,
+            });
+        } catch (error) {
+            res.status(400).send({
+                success: false,
+                message: error.message,
+            });
+        }  
+    };
 }
 
 export default UserControllers;

@@ -37,7 +37,7 @@ User.init(
         console.log(salt);
         const hash = await bcrypt.hash(user.password, salt);
         console.log(hash);
-        user.password=hash;
+        user.password = hash;
     });
 
     export default User;

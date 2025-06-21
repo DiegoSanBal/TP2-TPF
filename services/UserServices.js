@@ -12,6 +12,12 @@ class UserServices {
         const { id, name } = await User.create(data);
         return { id, name };
     };
+    login = async (data) => {
+        const { email, password } = data;
+        const user = await User.findOne({
+            where: { email },
+        })
+    }
 }
 
 export default UserServices;

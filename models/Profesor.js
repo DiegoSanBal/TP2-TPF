@@ -20,7 +20,7 @@ Profesor.init({
         validate: {
             len: [6, 100],
         },
-    },
+    }
 }, {
     modelName: "Profesor",
     timestamps: false,
