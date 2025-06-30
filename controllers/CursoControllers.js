@@ -12,7 +12,7 @@ class CursoControllers {
     };
     getCursoByIdControllers = async (req, res) => {
         const { id } = req.params;
-        const curso = this.cursoServices.getCursoServiceById(id);
+        const curso = await this.cursoServices.getCursoServiceById(id);
         res.status(200).json({
             success: true,
             message: curso,
@@ -36,11 +36,42 @@ class CursoControllers {
             });
         }
     };
-    updateCursoControllers(req, res) {
-        res.status(200).send("updateCursoControllers");
-    }
-    deleteCursoControllers(req, res) {
-        res.status(200).send("deleteCursoControllers");
+    updateCursoControllers = async (req, res) => {
+        const { id } = req.params;
+        const { nombre, descripcion } = req.body;
+        try {
+            const curso = await this.cursoServices.updateCursoServices(id, {
+                nombre,
+                descripcion,
+            });
+            res.status(200).json({
+            success: true,
+            message: curso,
+            });
+        } catch (error) {
+            {
+        res.status(400).json({
+            success: false,
+            message: error.message,
+        });
+        
+    };
+        }
+    };
+    deleteCursoControllers = async (req, res) =>{
+        const { id } = req.params;
+        try {
+            const curso = await this.cursoServices.deleteCursoServices(id);
+            res.status(200).json({
+                success: true,
+                message: curso,
+            });
+        } catch (error) {
+            res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
     }
 }
 
