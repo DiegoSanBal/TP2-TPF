@@ -1,13 +1,11 @@
-import User from "./User.js"
-import Curso from "./Curso.js"
+import User from "./User.js";
+import Curso from "./Curso.js";
 import Profesor from "./Profesor.js";
 
-Curso.hasMany(User);
-User.belongsTo(Curso);
-Profesor.hasMany(User);
-Profesor.hasOne(Curso);
-Curso.belongsTo(Profesor)
-User.hasMany(Curso);
-Curso.belongsTo(User);
+Curso.belongsToMany(User, { through: "UserCurso" });
+User.belongsToMany(Curso, { through: "UserCurso" });
 
-export {User, Curso, Profesor} ;
+Curso.hasMany(Profesor);
+Profesor.belongsTo(Curso);
+
+export { User, Curso, Profesor };
