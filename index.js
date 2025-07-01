@@ -4,6 +4,7 @@ import connections from "./connections/connections.js";
 import { SERVER_PORT } from "./config/config.js";
 import User from "./models/User.js";
 import Curso from "./models/Curso.js";
+import Profesor from "./models/Profesor.js";
 import { Sequelize } from "sequelize";
 
 const app = express();
