@@ -8,13 +8,13 @@ Este proyecto implementa un servidor y una API RESTful utilizando **Node.js**, *
 - Implementación modular con controladores, servicios y modelos.
 - Integración con base de datos PostgreSQL vía Sequelize.
 - Encriptación de contraseñas con bcrypt.
-- Endpoints RESTful para operaciones CRUD de usuarios y profesores.
+- Endpoints RESTful para operaciones CRUD de usuarios, profesores y cursos.
 
 ## Requisitos
 
-- [Node.js](https://nodejs.org/) (versión recomendada: 18.x o superior)
+- [Node.js](https://nodejs.org/)
 - [npm](https://www.npmjs.com/)
-- [PostgreSQL](https://www.postgresql.org/) (instalado y en ejecución)
+- [PostgreSQL](https://www.postgresql.org/)
 
 ## Instalación
 
@@ -33,7 +33,7 @@ npm install
 
 3. Configurá la base de datos PostgreSQL:
    - Creá una base de datos.
-   - Actualizá las credenciales en `connections/connections.js` o `.env` si usás variables de entorno.
+   - Actualizá las credenciales en `connections/connections.js` o `.env`.
 
 ## Ejecución del servidor
 
