@@ -143,7 +143,7 @@ El servidor corre por defecto en `http://localhost:3000`.
 - Las contraseñas se almacenan de forma segura utilizando hashing con **bcrypt**.
 - La estructura del proyecto permite fácil escalabilidad y mantenimiento.
 
-## ✍️ Autor
+## ✍️ Autores
 
 Diego Santurtun, Joaquin Lagares, Ignacio Flores Arnaldo
 Trabajo Práctico Final - TP2
