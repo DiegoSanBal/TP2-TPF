@@ -10,13 +10,27 @@ class ProfesorControllers {
             message: profesors,
         });
     };
+
     getProfesorByIdControllers = async (req, res) => {
-        const { id } = req.params;
-        const profesor = this.profesorServices.getProfesorServicesById(id);
-        res.status(200).send({
-            success: true,
-            message: profesor,
-        });
+
+        try {
+
+            const { id } = req.params;
+            if (!id || isNan(id)) {
+                return res.status(400).send({ succes: false, message: error.message })
+            }
+            const profesor = await this.profesorServices.getProfesorServicesById(id);
+            res.status(200).send({
+                success: true,
+                message: profesor,
+            });
+        }
+        catch (err) {
+            res.status(404).send({
+                success: false,
+                message: err.message,
+            })
+        }
     };
     createProfesorControllers = async (req, res) => {
         try {
@@ -37,12 +51,46 @@ class ProfesorControllers {
             });
         }
     };
-    updateProfesorControllers(req, res) {
-        res.status(200).send("updateProfesorControllers");
+    updateProfesorControllers = async (req, res) => {
+        const { id } = req.params;
+        const { name } = req.body;
+        try {
+            if (!id || isNan(id)) {
+                return res.status(400).send({ succes: false, message: error.message })
+            }
+            const updatedProfesor = await this.profesorServices.updateProfesorServices(id, name);
+            res.status(200).send({
+                success: true,
+                message: "Profesor updated",
+                data: updatedProfesor,
+            })
+        } catch {
+            res.status(404).send({
+                success: false,
+                message: error.message,
+            })
+        }
     }
-    deleteProfesorController(req, res) {
-        res.status(200).send("deleteProfesorController");
-    }
+    deleteProfesorController = async (req, res) => {
+        try {
+            const { id } = req.params;
+              if (!id || isNan(id)) {
+                return res.status(400).send({ succes: false, message: error.message })
+            }
+            const result = await this.profesorServices.deleteProfesorServices(id);
+            res.status(200).send({
+                succes: true,
+                message: result,
+            })
+        } catch (error) {
+            res.status(400).send({
+                succes: false,
+                message: error.message,
+            })
+
+        }
+    };
+
 }
 
 export default ProfesorControllers;
