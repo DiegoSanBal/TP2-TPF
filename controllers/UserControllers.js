@@ -11,12 +11,27 @@ class UserControllers {
     });
   };
   getUserByIdControllers = async (req, res) => {
-    const { id } = req.params;
-    const user = this.userServices.getUserServicesById(id);
-    res.status(200).send({
-      success: true,
-      message: user,
-    });
+    try {
+      const { id } = req.params;
+      if (!id || isNaN(id)) {
+        return res.status(400).send({
+          success: false,
+          message: "User ID es invalido",
+        });
+      }
+
+      const user = await this.userServices.getUserServicesById(id);
+
+      res.status(200).send({
+        success: true,
+        message: user,
+      });
+    } catch (error) {
+      res.status(400).send({
+        success: false,
+        message: error.message,
+      });
+    }
   };
   createUserControllers = async (req, res) => {
     try {
@@ -37,12 +52,47 @@ class UserControllers {
       });
     }
   };
-  updateUserControllers(req, res) {
-    res.status(200).send("updateUserControllers");
-  }
-  deleteUserController(req, res) {
-    res.status(200).send("deleteUserController");
-  }
+  updateUserControllers = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const userData = req.body;
+
+      const updatedUser = await this.userServices.updateUserServices(
+        id,
+        userData
+      );
+      res.status(200).send({
+        success: true,
+        message: "Usuari actualizado correctamente",
+        data: updatedUser,
+      });
+    } catch (error) {
+      res.status(400).send({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+  deleteUserController = async (req, res) => {
+    try {
+      const { id } = req.params;
+      if (!id || isNaN(id)) {
+        return res.status(400).send({ success: false, message: "ID inválido" });
+      }
+
+      await this.userServices.deleteUserService(id);
+
+      res.status(200).send({
+        success: true,
+        message: "Usuario eliminado correctamente",
+      });
+    } catch {
+      res.status(400).send({
+        success: false,
+        message: "Error al eliminar el usuario",
+      });
+    }
+  };
 
   login(req, res) {
     try {
