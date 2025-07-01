@@ -1,47 +1,92 @@
 import CursoServices from "../services/CursoServices.js";
 
 class CursoControllers {
-    cursoServices = new CursoServices();
+  cursoServices = new CursoServices();
 
-    getAllCursosControllers = async (req, res) => {
-        const cursos = await this.cursoServices.getAllCursosServices();
-        res.status(200).json({
-            success: true,
-            message: cursos,
+  getAllCursosControllers = async (req, res) => {
+    const cursos = await this.cursoServices.getAllCursosServices();
+    res.status(200).json({
+      success: true,
+      message: cursos,
+    });
+  };
+  getCursoByIdControllers = async (req, res) => {
+    try {
+      const { id } = req.params;
+
+      if (!id || isNaN(id)) {
+        return res.status(400).json({
+          success: false,
+          message: "ID inválido",
         });
-    };
-    getCursoByIdControllers = async (req, res) => {
-        const { id } = req.params;
-        const curso = this.cursoServices.getCursoServiceById(id);
-        res.status(200).json({
-            success: true,
-            message: curso,
+      }
+
+      const curso = await this.cursoServices.getCursoServiceById(id);
+      res.status(200).json({
+        success: true,
+        message: curso,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+  createCursoControllers = async (req, res) => {
+    try {
+      const { nombre, descripcion } = req.body;
+      const curso = await this.cursoServices.createCursoServices({
+        nombre,
+        descripcion,
+      });
+      res.status(200).json({
+        success: true,
+        message: curso,
+      });
+    } catch (error) {
+      res.status(400).send({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+  updateCursoControllers = async (req, res) => {
+    const { id } = req.params;
+    const { nombre, descripcion } = req.body;
+    try {
+      const curso = await this.cursoServices.updateCursoServices(id, {
+        nombre,
+        descripcion,
+      });
+      res.status(200).json({
+        success: true,
+        message: curso,
+      });
+    } catch (error) {
+      {
+        res.status(400).json({
+          success: false,
+          message: error.message,
         });
-    };
-    createCursoControllers = async (req, res) => {
-        try {
-            const {nombre, descripcion} = req.body;
-            const curso = await this.cursoServices.createCursoServices({
-                nombre,
-                descripcion,
-            });
-            res.status(200).json({
-            success: true,
-            message: curso,
-            });
-        } catch (error) {
-            res.status(400).send({
-                success: false,
-                message: error.message,
-            });
-        }
-    };
-    updateCursoControllers(req, res) {
-        res.status(200).send("updateCursoControllers");
+      }
     }
-    deleteCursoControllers(req, res) {
-        res.status(200).send("deleteCursoControllers");
+  };
+  deleteCursoControllers = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const curso = await this.cursoServices.deleteCursoServices(id);
+      res.status(200).json({
+        success: true,
+        message: curso,
+      });
+    } catch (error) {
+      res.status(400).json({
+        success: false,
+        message: error.message,
+      });
     }
+  };
 }
 
 export default CursoControllers;
