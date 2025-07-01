@@ -141,7 +141,6 @@ El servidor corre por defecto en `http://localhost:3000`.
 - Asegurate de que el puerto `3000` esté libre antes de iniciar el servidor.
 - PostgreSQL debe estar ejecutándose y correctamente configurado.
 - Las contraseñas se almacenan de forma segura utilizando hashing con **bcrypt**.
-- La estructura del proyecto permite fácil escalabilidad y mantenimiento.
 
 ## ✍️ Autores
 
