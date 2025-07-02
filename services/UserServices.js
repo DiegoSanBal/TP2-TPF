@@ -1,12 +1,37 @@
-import { User } from "../models/index.js";
+import { User, Curso, Profesor } from "../models/index.js";
 class UserServices {
   getAllUsersServices = async () => {
-    const users = await User.findAll();
+    const users = await User.findAll({
+      include: [
+        {
+          model: Curso,
+          through: { attributes: [] },
+          include: [
+            {
+              model: Profesor,
+              attributes: ["id", "name", "email"],
+            },
+          ],
+        },
+      ],
+    });
     return users;
   };
   getUserServicesById = async (id) => {
-    console.log(id);
-    const user = await User.findByPk(id);
+    const user = await User.findByPk(id, {
+      include: [
+        {
+          model: Curso,
+          through: { attributes: [] },
+          include: [
+            {
+              model: Profesor,
+              attributes: ["id", "name", "email"],
+            },
+          ],
+        },
+      ],
+    });
     if (!user) {
       throw new Error("User not found");
     }
@@ -14,15 +39,27 @@ class UserServices {
   };
 
   createUserServices = async (data) => {
-    const { id, name } = await User.create(data);
-    return { id, name };
+    const { cursos, ...userData } = data;
+
+    const nuevoUser = await User.create(userData);
+    if (cursos && Array.isArray(cursos)) {
+      await nuevoUser.addCursos(cursos);
+    }
+    return nuevoUser;
   };
+
   updateUserServices = async (id, data) => {
+    const { cursos, ...userData } = data;
     const user = await User.findByPk(id);
+
     if (!user) {
       throw new Error("Usuario no encontrado");
     }
-    await user.update(data);
+    await user.update(userData);
+
+    if (Array.isArray(cursos)) {
+      await user.setCursos(cursos);
+    }
     return user;
   };
   deleteUserService = async (id) => {

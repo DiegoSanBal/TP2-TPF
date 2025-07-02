@@ -35,12 +35,9 @@ class UserControllers {
   };
   createUserControllers = async (req, res) => {
     try {
-      const { name, email, password } = req.body;
-      const user = await this.userServices.createUserServices({
-        name,
-        email,
-        password,
-      });
+      const data = req.body;
+      const user = await this.userServices.createUserServices(data);
+
       res.status(200).send({
         success: true,
         message: user,
@@ -55,15 +52,13 @@ class UserControllers {
   updateUserControllers = async (req, res) => {
     try {
       const { id } = req.params;
-      const userData = req.body;
+      const data = req.body;
 
-      const updatedUser = await this.userServices.updateUserServices(
-        id,
-        userData
-      );
+      const updatedUser = await this.userServices.updateUserServices(id, data);
+
       res.status(200).send({
         success: true,
-        message: "Usuari actualizado correctamente",
+        message: "Usuario actualizado correctamente",
         data: updatedUser,
       });
     } catch (error) {

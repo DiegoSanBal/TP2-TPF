@@ -38,12 +38,8 @@ class ProfesorControllers {
   };
   createProfesorControllers = async (req, res) => {
     try {
-      const { name, email, password } = req.body;
-      const profesor = await this.profesorServices.createProfesorServices({
-        name,
-        email,
-        password,
-      });
+      const data = req.body;
+      const profesor = await this.profesorServices.createProfesorServices(data);
       res.status(200).send({
         success: true,
         message: profesor,
@@ -57,8 +53,7 @@ class ProfesorControllers {
   };
   updateProfesorControllers = async (req, res) => {
     const { id } = req.params;
-    const { name, email, password } = req.body;
-    const data = { name, email, password };
+    const data = req.body;
     try {
       if (!id || isNaN(id)) {
         return res.status(400).send({
