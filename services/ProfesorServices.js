@@ -1,12 +1,26 @@
-import { Profesor } from "../models/index.js";
+import { Profesor, Curso } from "../models/index.js";
 
 class ProfesorServices {
   getAllProfesorsServices = async () => {
-    const profesors = await Profesor.findAll();
+    const profesors = await Profesor.findAll({
+      include: [
+        {
+          model: Curso,
+          attributes: ["id", "nombre", "descripcion"],
+        },
+      ],
+    });
     return profesors;
   };
   getProfesorServicesById = (id) => {
-    const profesor = Profesor.findByPk(id);
+    const profesor = Profesor.findByPk(id, {
+      include: [
+        {
+          model: Curso,
+          attributes: ["id", "nombre", "descripcion"],
+        },
+      ],
+    });
     if (!profesor) {
       throw new Error("Profesor not found");
     }
@@ -14,13 +28,15 @@ class ProfesorServices {
   };
 
   createProfesorServices = async (data) => {
-    const { id, name } = await Profesor.create(data);
-    return { id, name };
+    console.log(data);
+    const profesor = await Profesor.create(data);
+    return profesor;
   };
 
   updateProfesorServices = async (id, data) => {
     const profesor = await Profesor.findByPk(id);
     if (!profesor) throw new Error("Profesor not found");
+    console.log(data);
     await profesor.update(data);
 
     return profesor;

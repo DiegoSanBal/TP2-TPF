@@ -22,6 +22,13 @@ Profesor.init(
         len: [6, 100],
       },
     },
+    CursoId: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: "Cursos",
+        key: "id",
+      },
+    },
   },
   {
     modelName: "Profesor",
@@ -31,6 +38,12 @@ Profesor.init(
 );
 
 Profesor.beforeCreate(async (profesor) => {
+  const salt = await bcrypt.genSalt(10);
+  const hash = await bcrypt.hash(profesor.password, salt);
+  profesor.password = hash;
+});
+
+Profesor.beforeUpdate(async (profesor) => {
   const salt = await bcrypt.genSalt(10);
   const hash = await bcrypt.hash(profesor.password, salt);
   profesor.password = hash;

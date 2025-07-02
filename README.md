@@ -71,7 +71,8 @@ El servidor corre por defecto en `http://localhost:3000`.
   {
     "name": "Juan",
     "email": "juan@email.com",
-    "password": "123456"
+    "password": "123456",
+    "cursos": []
   }
   ```
 
@@ -99,7 +100,8 @@ El servidor corre por defecto en `http://localhost:3000`.
   {
     "name": "Laura",
     "email": "laura@email.com",
-    "password": "prof1234"
+    "password": "prof1234",
+    "CursoId": #
   }
   ```
 
@@ -138,7 +140,7 @@ El servidor corre por defecto en `http://localhost:3000`.
 
 ## Notas
 
-- Asegurate de que el puerto `3000` esté libre antes de iniciar el servidor.
+- Asegurar de que el puerto `3000` esté libre antes de iniciar el servidor.
 - PostgreSQL debe estar ejecutándose y correctamente configurado.
 - Las contraseñas se almacenan de forma segura utilizando hashing con **bcrypt**.
 
