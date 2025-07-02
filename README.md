@@ -114,27 +114,27 @@ El servidor corre por defecto en `http://localhost:3000`.
 ### Curso (`/curso`)
 
 - `GET /curso`  
-  Lista todos los profesores.
+  Lista todos los cursos.
 
 - `GET /curso/:id`  
-  Obtiene un profesor por ID.
+  Obtiene un curso por ID.
 
 - `POST /curso`  
-  Crea un nuevo profesor.  
+  Crea un nuevo curso.  
   **Body:**
 
   ```json
   {
-    "nombre": "Laura",
-    "descripcion": "laura@email.com"
+    "nombre": "TP2",
+    "descripcion": "Taller de Programacion 2"
   }
   ```
 
 - `PUT /curso/:id`  
-  Actualiza un profesor existente.
+  Actualiza un curso existente.
 
 - `DELETE /curso/:id`  
-  Elimina un profesor.
+  Elimina un curso.
 
 ---
 
