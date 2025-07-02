@@ -1,7 +1,7 @@
-import {env} from 'node:process';
+import { env } from "node:process";
+import dotenv from "dotenv";
+dotenv.config();
 
-const SERVER_PORT = env.SERVER_PORT || 3000; 
+const SERVER_PORT = process.env.SERVER_PORT;
 
-export {
-    SERVER_PORT,
-}
+export { SERVER_PORT };
