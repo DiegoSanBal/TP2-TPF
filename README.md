@@ -144,7 +144,7 @@ El servidor corre por defecto en `http://localhost:3000`.
 - PostgreSQL debe estar ejecutándose y correctamente configurado.
 - Las contraseñas se almacenan de forma segura utilizando hashing con **bcrypt**.
 
-## ✍️ Autores
+## Autores
 
 Diego Santurtun, Joaquin Lagares, Ignacio Flores Arnaldo
 Trabajo Práctico Final - TP2
